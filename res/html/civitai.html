@@ -26,7 +26,6 @@
                 </button>
             </div>
 
-            <!--            TODO: Store these search setting in config-->
             <div class="grid grid-cols-1 md:grid-cols-5 gap-2 items-center">
                 <!-- Type selector -->
                 <select name="types" multiple size="7"
@@ -51,57 +50,70 @@
 
                 <select name="baseModels" multiple size="7"
                         class="col-span-1 select input-rounded">
-                    <option value="Wan Video 14B i2v 720p">Wan Video 14B i2v 720p</option>
-                    <option value="Wan Video 14B i2v 480p">Wan Video 14B i2v 480p</option>
-                    <option value="Wan Video 14B t2v">Wan Video 14B t2v</option>
-                    <option value="Wan Video 1.3B t2v">Wan Video 1.3B t2v</option>
-                    <option value="Wan Video">Wan Video</option>
-                    <option value="SVD XT">SVD XT</option>
-                    <option value="SVD">SVD</option>
-                    <option value="Stable Cascade">Stable Cascade</option>
-                    <option value="SDXL Turbo">SDXL Turbo</option>
-                    <option value="SDXL Lightning">SDXL Lightning</option>
-                    <option value="SDXL Hyper">SDXL Hyper</option>
-                    <option value="SDXL Distilled">SDXL Distilled</option>
-                    <option value="SDXL 1.0 LCM">SDXL 1.0 LCM</option>
-                    <option value="SDXL 1.0">SDXL 1.0</option>
-                    <option value="SDXL 0.9">SDXL 0.9</option>
-                    <option value="SD 3.5 Medium">SD 3.5 Medium</option>
-                    <option value="SD 3.5 Large Turbo">SD 3.5 Large Turbo</option>
-                    <option value="SD 3.5 Large">SD 3.5 Large</option>
-                    <option value="SD 3.5">SD 3.5</option>
-                    <option value="SD 3">SD 3</option>
-                    <option value="SD 2.1 Unclip">SD 2.1 Unclip</option>
-                    <option value="SD 2.1 768">SD 2.1 768</option>
-                    <option value="SD 2.1">SD 2.1</option>
-                    <option value="SD 2.0 768">SD 2.0 768</option>
-                    <option value="SD 2.0">SD 2.0</option>
-                    <option value="SD 1.5 LCM">SD 1.5 LCM</option>
-                    <option value="SD 1.5 Hyper">SD 1.5 Hyper</option>
-                    <option value="SD 1.5">SD 1.5</option>
-                    <option value="SD 1.4">SD 1.4</option>
-                    <option value="Pony">Pony</option>
-                    <option value="PixArt E">PixArt E</option>
-                    <option value="PixArt a">PixArt a</option>
-                    <option value="Playground v2">Playground v2</option>
-                    <option value="Other">Other</option>
-                    <option value="OpenAI">OpenAI</option>
-                    <option value="ODOR">ODOR</option>
-                    <option value="NoobAI">NoobAI</option>
-                    <option value="Mochi">Mochi</option>
-                    <option value="Lumina">Lumina</option>
-                    <option value="LTXV">LTXV</option>
-                    <option value="Kolors">Kolors</option>
+                    <option value="">Any</option>
+                    <option value="AuraFlow">AuraFlow</option>
+                    <option value="Chroma">Chroma</option>
+                    <option value="CogVideoX">CogVideoX</option>
+                    <option value="Flux.1 S">Flux.1 S</option>
+                    <option value="Flux.1 D">Flux.1 D</option>
+                    <option value="Flux.1 Krea">Flux.1 Krea</option>
+                    <option value="Flux.1 Kontext">Flux.1 Kontext</option>
+                    <option value="HiDream">HiDream</option>
+                    <option value="Hunyuan 1">Hunyuan 1</option>
+                    <option value="Hunyuan Video">Hunyuan Video</option>
                     <option value="Illustrious">Illustrious</option>
                     <option value="Imagen4">Imagen4</option>
-                    <option value="Hunyuan Video">Hunyuan Video</option>
-                    <option value="Hunyuan 1">Hunyuan 1</option>
-                    <option value="HiDream">HiDream</option>
-                    <option value="Flux.1 S">Flux.1 S</option>
-                    <option value="Flux.1 Kontext">Flux.1 Kontext</option>
-                    <option value="Flux.1 D">Flux.1 D</option>
-                    <option value="CogVideoX">CogVideoX</option>
-                    <option value="AuraFlow">AuraFlow</option>
+                    <option value="Kolors">Kolors</option>
+                    <option value="LTXV">LTXV</option>
+                    <option value="Lumina">Lumina</option>
+                    <option value="Mochi">Mochi</option>
+                    <option value="Nano Banana">Nano Banana</option>
+                    <option value="NoobAI">NoobAI</option>
+                    <option value="ODOR">ODOR</option>
+                    <option value="OpenAI">OpenAI</option>
+                    <option value="Other">Other</option>
+                    <option value="PixArt a">PixArt a</option>
+                    <option value="PixArt E">PixArt E</option>
+                    <option value="Playground v2">Playground v2</option>
+                    <option value="Pony">Pony</option>
+                    <option value="Pony V7">Pony V7</option>
+                    <option value="Qwen">Qwen</option>
+                    <option value="Stable Cascade">Stable Cascade</option>
+                    <option value="SD 1.4">SD 1.4</option>
+                    <option value="SD 1.5">SD 1.5</option>
+                    <option value="SD 1.5 LCM">SD 1.5 LCM</option>
+                    <option value="SD 1.5 Hyper">SD 1.5 Hyper</option>
+                    <option value="SD 2.0">SD 2.0</option>
+                    <option value="SD 2.0 768">SD 2.0 768</option>
+                    <option value="SD 2.1">SD 2.1</option>
+                    <option value="SD 2.1 768">SD 2.1 768</option>
+                    <option value="SD 2.1 Unclip">SD 2.1 Unclip</option>
+                    <option value="SD 3">SD 3</option>
+                    <option value="SD 3.5">SD 3.5</option>
+                    <option value="SD 3.5 Large">SD 3.5 Large</option>
+                    <option value="SD 3.5 Large Turbo">SD 3.5 Large Turbo</option>
+                    <option value="SD 3.5 Medium">SD 3.5 Medium</option>
+                    <option value="SDXL 0.9">SDXL 0.9</option>
+                    <option value="SDXL 1.0">SDXL 1.0</option>
+                    <option value="SDXL 1.0 LCM">SDXL 1.0 LCM</option>
+                    <option value="SDXL Lightning">SDXL Lightning</option>
+                    <option value="SDXL Hyper">SDXL Hyper</option>
+                    <option value="SDXL Turbo">SDXL Turbo</option>
+                    <option value="SDXL Distilled">SDXL Distilled</option>
+                    <option value="Seedream">Seedream</option>
+                    <option value="SVD">SVD</option>
+                    <option value="SVD XT">SVD XT</option>
+                    <option value="Veo 3">Veo 3</option>
+                    <option value="Wan Video">Wan Video</option>
+                    <option value="Wan Video 1.3B t2v">Wan Video 1.3B t2v</option>
+                    <option value="Wan Video 14B t2v">Wan Video 14B t2v</option>
+                    <option value="Wan Video 14B i2v 480p">Wan Video 14B i2v 480p</option>
+                    <option value="Wan Video 14B i2v 720p">Wan Video 14B i2v 720p</option>
+                    <option value="Wan Video 2.2 TI2V-5B">Wan Video 2.2 TI2V-5B</option>
+                    <option value="Wan Video 2.2 I2V-A14B">Wan Video 2.2 I2V-A14B</option>
+                    <option value="Wan Video 2.2 T2V-A14B">Wan Video 2.2 T2V-A14B</option>
+                    <option value="Wan Video 2.5 T2V">Wan Video 2.5 T2V</option>
+                    <option value="Wan Video 2.5 I2V">Wan Video 2.5 I2V</option>
                 </select>
 
                 <!-- Sort selector -->
@@ -252,7 +264,9 @@
             url.searchParams.append("types", types.join(","));
         }
         for (const baseM of baseModels) {
-            url.searchParams.append("baseModels", baseM);
+            if (baseM !== "") {
+                url.searchParams.append("baseModels", baseM);
+            }
         }
         if (cursor) {
             url.searchParams.set("cursor", cursor);
