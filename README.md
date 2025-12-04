@@ -6,7 +6,7 @@ Stable Diffusion Models Manager
 [![pipeline status](https://gitlab.com/kimtinh/sdmm/badges/master/pipeline.svg)](https://gitlab.com/kimtinh/sdmm/-/commits/master)
 
 [![Gitlab](https://img.shields.io/badge/gitlab-%23181717.svg?style=for-the-badge&logo=gitlab&logoColor=white)](https://gitlab.com/kimtinh/sdmm)
-[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/dothanhtrung/sdmm)
+[![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/trung1-dothanh/sdmm)
 
   
 [![demo video](https://img.youtube.com/vi/85oTHZkGkZU/maxresdefault.jpg)](https://youtu.be/85oTHZkGkZU)
