@@ -1,17 +1,17 @@
 //! Copyright (c) 2025 Trung Do <dothanhtrung@pm.me>.
 
-use crate::api::{CommonResponse, DeleteRequest, SearchQuery, TRASH_DIR, get_abs_path};
-use crate::civitai::{FileType, PREVIEW_EXT, download_file, file_type, get_extension_from_url, get_item_info};
+use crate::api::{get_abs_path, CommonResponse, DeleteRequest, SearchQuery, TRASH_DIR};
+use crate::civitai::{download_file, file_type, get_extension_from_url, get_item_info, FileType, PREVIEW_EXT};
+use crate::db::job::{add_job, update_job, JobState};
+use crate::db::tag::{update_item_note, update_tag_item, TagCount};
 use crate::db::DBPool;
-use crate::db::job::{JobState, add_job, update_job};
-use crate::db::tag::{TagCount, update_item_note, update_tag_item};
 use crate::ui::Broadcaster;
-use crate::{ConfigData, api, db};
+use crate::{api, db, ConfigData};
 use actix_web::web::Data;
-use actix_web::{Responder, get, post, rt, web};
+use actix_web::{get, post, rt, web, Responder};
 use actix_web_lab::extract::Query;
+use reqwest::header::{HeaderMap, HeaderValue, AUTHORIZATION};
 use reqwest::Client;
-use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::cmp::max;
@@ -102,7 +102,8 @@ async fn get_items(
         }
     } else if let Some(search_string) = &query_params.search {
         let tag_only = query_params.tag_only.unwrap_or(false);
-        match db::item::search(&db_pool.sqlite_pool, search_string, limit, offset, tag_only).await {
+        let duplicate_only = query_params.duplicate_only.unwrap_or(false);
+        match db::item::search(&db_pool.sqlite_pool, search_string, limit, offset, tag_only, duplicate_only).await {
             Ok((i, t)) => (i, t),
             Err(e) => {
                 err = Some(format!("{}", e));

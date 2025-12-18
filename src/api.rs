@@ -35,11 +35,14 @@ pub fn scope_config(cfg: &mut web::ServiceConfig) {
 
 #[derive(Deserialize, Default)]
 pub struct SearchQuery {
+    /// Highest priority
+    id: Option<i64>,
+
     page: Option<i64>,
     count: Option<i64>,
     pub(crate) search: Option<String>,
     tag_only: Option<bool>,
-    id: Option<i64>,
+    duplicate_only: Option<bool>,
 }
 
 #[derive(Deserialize)]

@@ -110,37 +110,44 @@ pub async fn search(
     limit: i64,
     offset: i64,
     tag_only: bool,
+    duplicate_only: bool,
 ) -> Result<(Vec<Item>, i64), sqlx::Error> {
     //TODO: Search in note too
     let mut items = IndexSet::new();
     let mut count = 0;
     let mut exclude_name = String::new();
+
+    let duplicate_cond = if duplicate_only {
+        "AND blake3 IN (
+            SELECT blake3 FROM item
+            WHERE is_checked = true
+            GROUP BY blake3
+            HAVING COUNT(*) > 1
+        )"
+    } else {
+        ""
+    };
+
     if !tag_only {
-        let items_by_name = sqlx::query_as!(
-            Item,
-            r#"SELECT id,name, path, base_label, note FROM item
-           WHERE is_checked = true
-                 AND (name COLLATE NOCASE LIKE '%' || ? || '%'
-                      OR model_name COLLATE NOCASE LIKE '%' || ? || '%')
-           ORDER BY updated_at DESC
-           LIMIT ? OFFSET ?"#,
-            search,
-            search,
-            limit,
-            offset
-        )
-        .fetch_all(pool)
-        .await?;
-        let count_by_name = sqlx::query_scalar!(
-            r#"SELECT count(id) FROM item
-               WHERE is_checked = true
-                 AND (name COLLATE NOCASE LIKE '%' || ? || '%'
-                      OR model_name COLLATE NOCASE LIKE '%' || ? || '%')"#,
-            search,
-            search
-        )
-        .fetch_one(pool)
-        .await?;
+        let cond = format!(
+            "FROM item
+            WHERE is_checked = true
+                AND (name COLLATE NOCASE LIKE '%' || {} || '%'
+                  OR model_name COLLATE NOCASE LIKE '%' || {} || '%')
+                {}",
+            search, search, &duplicate_cond,
+        );
+        let query = format!(
+            "SELECT id,name, path, base_label, note
+            {}
+            ORDER BY updated_at DESC
+            LIMIT {} OFFSET {}",
+            &cond, limit, offset
+        );
+        let items_by_name = sqlx::query_as(&query).fetch_all(pool).await?;
+
+        let count_query = format!("SELECT count(id) {}", &cond);
+        let count_by_name: i64 = sqlx::query_scalar(&count_query).fetch_one(pool).await?;
 
         exclude_name = format!(
             "AND NOT (item.name COLLATE NOCASE LIKE '%{}%'
@@ -165,14 +172,18 @@ pub async fn search(
           WHERE item.is_checked = true
             AND tag.name IN ('{}')
             {}
+            {}
           GROUP BY item.id
           HAVING COUNT(DISTINCT tag.id) = {}",
             tags.join("','"),
             &exclude_name,
+            &duplicate_cond,
             tags.len()
         );
         let query = format!(
-            "SELECT item.id as id, item.name as name, item.note as note, item.path as path, item.base_label as base_label {} ORDER BY item.updated_at DESC LIMIT {} OFFSET {}",
+            "SELECT item.id as id, item.name as name, item.note as note, item.path as path, item.base_label as base_label
+            {}
+            ORDER BY item.updated_at DESC LIMIT {} OFFSET {}",
             condition, limit, offset
         );
         let search_by_tags: Vec<Item> = sqlx::query_as(&query).fetch_all(pool).await?;

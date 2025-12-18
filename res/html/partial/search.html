@@ -1,23 +1,37 @@
 <div class="px-4 py-4 flex justify-center">
-  <form action="/" method="GET" class="w-full max-w-md flex">
-    <input
-            type="text"
-            name="search"
-            placeholder="Search..."
-            value=""
-            class="flex-grow input input-rounded-l"
-    />
-    <button
-            type="submit"
-            class="btn btn-icon btn-icon-rounded-r border-l-0"
-    >
+  <form action="/" method="GET" class="w-full max-w-md flex flex-col">
+    <div class="flex">
+      <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              value=""
+              class="flex-grow input input-rounded-l"
+      />
+      <button
+              type="submit"
+              class="btn btn-icon btn-icon-rounded-r border-l-0"
+      >
 
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24"
-           stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 4.5 4.5a7.5 7.5 0 0 0 12.15 12.15z" />
-      </svg>
-    </button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24"
+             stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 4.5 4.5a7.5 7.5 0 0 0 12.15 12.15z" />
+        </svg>
+      </button>
+    </div>
+    <div class="flex flex-row gap-4 mt-4 justify-center">
+      <div class="flex gap-4 mt-2">
+        <label class="flex items-center gap-1">
+          <input type="checkbox" name="tag_only" value="true" />
+          Tag Only
+        </label>
+        <label class="flex items-center gap-1">
+          <input type="checkbox" name="duplicate_only" value="true" />
+          Find Duplicate
+        </label>
+      </div>
+    </div>
   </form>
 </div>
 
@@ -26,6 +40,11 @@
     const params = new URLSearchParams(window.location.search);
     const searchValue = params.get("search") || "";
     const input = document.querySelector('input[name="search"]');
-    if (input) input.value = searchValue;
+    if (input) {
+      input.value = searchValue;
+    }
+    // Set checkboxes based on URL params
+    document.querySelector('input[name="tag_only"]').checked = params.has("tag_only");
+    document.querySelector('input[name="duplicate_only"]').checked = params.has("duplicate_only");
   });
 </script>
