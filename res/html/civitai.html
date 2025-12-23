@@ -178,6 +178,10 @@
         <div class="bg-gray-900 border border-gray-700 rounded-lg w-full max-w-5xl p-6 overflow-y-auto max-h-[90vh]">
             <button id="closeModal" class="text-white float-right text-xl">✖</button>
             <h2 id="modalTitle" class="text-2xl font-bold text-white mb-4"></h2>
+            <div>
+                <p>CivitAI: </p>
+                <a id="civitaiLink" class="mb-2 inline-block text-blue-400 hover:underline"></a>
+            </div>
             <div id="versionTabs" class="flex gap-2 mb-4 flex-wrap"></div>
             <div id="versionContent"></div>
             <div id="modelDescription"></div>
@@ -359,6 +363,10 @@
         document.getElementById("modalTitle").textContent = item.name;
         const desc = document.getElementById("modelDescription");
         desc.innerHTML = item.description || "";
+
+        let civitaiLink = document.getElementById("civitaiLink");
+        civitaiLink.href = `https://civitai.com/models/${item.id}`;
+        civitaiLink.textContent = `https://civitai.com/models/${item.id}`;
 
         const tabs = document.getElementById("versionTabs");
         const content = document.getElementById("versionContent");
