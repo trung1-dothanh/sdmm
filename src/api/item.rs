@@ -100,18 +100,10 @@ async fn get_items(
                 (Vec::new(), 0)
             }
         }
-    } else if let Some(search_string) = &query_params.search {
+    } else {
         let tag_only = query_params.tag_only.unwrap_or(false);
         let duplicate_only = query_params.duplicate_only.unwrap_or(false);
-        match db::item::search(&db_pool.sqlite_pool, search_string, limit, offset, tag_only, duplicate_only).await {
-            Ok((i, t)) => (i, t),
-            Err(e) => {
-                err = Some(format!("{}", e));
-                (Vec::new(), 0)
-            }
-        }
-    } else {
-        match db::item::get(&db_pool.sqlite_pool, limit, offset).await {
+        match db::item::search(&db_pool.sqlite_pool, &query_params.search, limit, offset, tag_only, duplicate_only).await {
             Ok((i, t)) => (i, t),
             Err(e) => {
                 err = Some(format!("{}", e));

@@ -40,7 +40,8 @@ pub struct SearchQuery {
 
     page: Option<i64>,
     count: Option<i64>,
-    pub(crate) search: Option<String>,
+    #[serde(default)]
+    pub(crate) search: String,
     tag_only: Option<bool>,
     duplicate_only: Option<bool>,
 }

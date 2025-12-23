@@ -87,23 +87,6 @@ pub async fn get_by_id(pool: &SqlitePool, id: i64) -> Result<Item, sqlx::Error> 
     Ok(item)
 }
 
-pub async fn get(pool: &SqlitePool, limit: i64, offset: i64) -> Result<(Vec<Item>, i64), sqlx::Error> {
-    let items = sqlx::query_as!(
-        Item,
-        r#"SELECT id, name, path, base_label, note FROM item WHERE is_checked = true ORDER BY updated_at DESC LIMIT ? OFFSET ?"#,
-        limit,
-        offset
-    )
-        .fetch_all(pool)
-        .await?;
-
-    let total = sqlx::query_scalar!("SELECT count(id) FROM item WHERE is_checked = true",)
-        .fetch_one(pool)
-        .await?;
-
-    Ok((items, total))
-}
-
 pub async fn search(
     pool: &SqlitePool,
     search: &str,
@@ -132,8 +115,8 @@ pub async fn search(
         let cond = format!(
             "FROM item
             WHERE is_checked = true
-                AND (name COLLATE NOCASE LIKE '%' || {} || '%'
-                  OR model_name COLLATE NOCASE LIKE '%' || {} || '%')
+                AND (name COLLATE NOCASE LIKE '%' || '{}' || '%'
+                  OR model_name COLLATE NOCASE LIKE '%' || '{}' || '%')
                 {}",
             search, search, &duplicate_cond,
         );

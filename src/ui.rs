@@ -159,7 +159,7 @@ async fn event_stream(broadcaster: Data<Broadcaster>) -> impl Responder {
 #[get("/")]
 async fn index(tmpl: Data<Tera>, query_params: Query<SearchQuery>) -> impl Responder {
     let mut ctx = tera::Context::new();
-    ctx.insert("search", &query_params.search.clone().unwrap_or_default());
+    ctx.insert("search", &query_params.search);
 
     match tmpl.render("index.html", &ctx) {
         Ok(template) => HttpResponse::Ok().content_type("text/html").body(template),
