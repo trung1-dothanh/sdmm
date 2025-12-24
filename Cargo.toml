@@ -1,6 +1,6 @@
 [package]
 name = "sdmm"
-version = "0.3.2"
+version = "0.3.3"
 edition = "2024"
 description = "Manage your SD models"
 
@@ -13,7 +13,7 @@ actix-cors = "0.7"
 actix-web-lab = "0.24"
 actix-web-httpauth = "0.8"
 clap = { version = "4.5", features = ["derive"] }
-ron = "0.11"
+ron = "0.12"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tokio = { version = "1.47", features = ["rt-multi-thread", "macros"] }
