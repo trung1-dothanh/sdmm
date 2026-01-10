@@ -34,7 +34,7 @@ pub fn scope(cfg: &mut web::ServiceConfig) {
 #[derive(Serialize)]
 struct SearchResponse {
     items: Vec<ModelInfo>,
-    total: i64,
+    total_page: i64,
     tags: Vec<TagCount>,
     err: Option<String>,
 }
@@ -87,7 +87,7 @@ async fn get_items(
 ) -> impl Responder {
     let config = config.config.read().await;
     let page = max(1, query_params.page.unwrap_or(1)) - 1;
-    let limit = max(0, query_params.count.unwrap_or(config.api.per_page as i64));
+    let limit = max(1, query_params.count.unwrap_or(config.api.per_page as i64));
     let offset = page * limit;
     let mut ret = Vec::new();
     let mut err = None;
@@ -171,7 +171,7 @@ async fn get_items(
 
     web::Json(SearchResponse {
         items: ret,
-        total,
+        total_page: total/limit + 1,
         tags,
         err,
     })

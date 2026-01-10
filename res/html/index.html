@@ -37,8 +37,7 @@
         return "/api/item" + (path === "/" ? "" : path) + search;
     }
 
-    function renderPagination(currentPage, totalItems, count) {
-        const totalPages = Math.max(1, Math.ceil(totalItems / count));
+    function renderPagination(currentPage, totalPages) {
         const top = document.getElementById("paginationTop");
         const bottom = document.getElementById("paginationBottom");
         top.innerHTML = bottom.innerHTML = "";
@@ -160,9 +159,8 @@
 
             const params = new URLSearchParams(window.location.search);
             const page = parseInt(params.get("page") || "1");
-            const count = parseInt(params.get("count") || "20");
 
-            renderPagination(page, data.total, count);
+            renderPagination(page, data.total_page);
 
         } catch (err) {
             grid.innerHTML = `<p class="text-red-400 text-center py-10">Failed to load items: ${err.message}</p>`;
